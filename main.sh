@@ -70,8 +70,8 @@ build_core(){
     cd $work_dir
 }
 full_build(){
-    # extract_blobs "$1"
-    # build_core
+     extract_blobs "$1"
+     build_core
     if [ "$2" == true ]
     then
         echo "Please position clip on 8M / BOTTOM CHIP"
@@ -99,18 +99,19 @@ flash(){
     fi
 }
 
-# read_flash "bottom"
+echo "Reading Flash for the 8M / Bottom Chip"
+read_flash "bottom"
 
-# echo "Please Reseat chip onto top flash chip"
-# echo "Press the A key to speed it up"
-# echo " "
-# sleep_counter "360"
+echo "Please Reseat chip onto 4M / Top flash chip"
+echo "Press the A key to speed it up"
+echo " "
+sleep_counter "360"
 
-# read_flash "top"
+read_flash "top"
 
-# bot_bios="$(compare "bottom")"
-# top_bios="$(compare "top")"
-# diff $bot_bios $top_bios >> diff.log
+bot_bios="$(compare "bottom")"
+top_bios="$(compare "top")"
+diff $bot_bios $top_bios >> diff.log
 echo $PWD
 if [ ! -s top.log ] && [ ! -s bottom.log ] 
 then
